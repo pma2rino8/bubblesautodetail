@@ -3,7 +3,7 @@ import Image from "next/image";
 
 export const metadata: Metadata = {
   title: "Studio",
-  description: "About Aurum Detail — our philosophy, our space, our team.",
+  description: "About Bubbles Auto Detail — our philosophy, our space, our team.",
 };
 
 const team = [
@@ -46,7 +46,7 @@ export default function StudioPage() {
           </div>
           <div className="space-y-5">
             <p className="font-sans text-[15px] text-platinum/70 leading-[1.8]">
-              Aurum Detail was founded on a single conviction: that a car&rsquo;s finish is not cosmetic — it is structural. Paint protects metal. Ceramic protects paint. Attention to detail protects everything else. We approach every vehicle as a commission rather than a service job.
+              Bubbles Auto Detail was founded on a single conviction: that a car&rsquo;s finish is not cosmetic — it is structural. Paint protects metal. Ceramic protects paint. Attention to detail protects everything else. We approach every vehicle as a commission rather than a service job.
             </p>
             <p className="font-sans text-[15px] text-platinum/70 leading-[1.8]">
               We are appointment-only, by design. We take on fewer cars than most studios so that each one receives the full attention it deserves. We do not rush. We do not cut corners. We do not leave until we are satisfied.

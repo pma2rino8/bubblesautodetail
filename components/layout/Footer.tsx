@@ -54,7 +54,7 @@ export function Footer() {
               <p className="font-sans text-[13px] text-platinum/60">2818 Olympic Blvd</p>
               <p className="font-sans text-[13px] text-platinum/60">Los Angeles, CA 90006</p>
               <p className="font-sans text-[13px] text-platinum/60 mt-4">+1 (310) 555-0192</p>
-              <p className="font-sans text-[13px] text-platinum/60">hello@aurumdetail.com</p>
+              <p className="font-sans text-[13px] text-platinum/60">hello@bubblesautodetail.com</p>
             </div>
           </div>
 
@@ -98,7 +98,7 @@ export function Footer() {
         {/* Bottom: legal */}
         <div className="border-t border-frost/5 py-6 flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
           <p className="font-mono text-[9px] tracking-[0.2em] text-platinum/25 uppercase">
-            © 2024 Aurum Detail. All rights reserved.
+            © 2024 Bubbles Auto Detail. All rights reserved.
           </p>
           <p className="font-mono text-[9px] tracking-[0.2em] text-platinum/25 uppercase">
             Los Angeles, California
@@ -113,7 +113,7 @@ export function Footer() {
             animate={inView ? { y: "15%" } : {}}
             transition={{ duration: 1.2, ease: [0.6, 0.01, 0.05, 0.95] }}
           >
-            AURUM
+            BUBBLES AUTO DETAIL
           </motion.div>
         </div>
       </div>

@@ -146,7 +146,7 @@ export const work = [
 
 export const testimonials = [
   {
-    quote: "We've used Aurum for every vehicle in our collection for the past six years. The level of care is unlike anything else in Los Angeles. They treat each car as if it's their own.",
+    quote: "We've used Bubbles for every vehicle in our collection for the past six years. The level of care is unlike anything else in Los Angeles. They treat each car as if it's their own.",
     author: "Jonathan M.",
     location: "Malibu, CA",
     vehicle: "2022 Porsche 911 Turbo S & 2020 Ferrari F8 Tributo",
@@ -158,7 +158,7 @@ export const testimonials = [
     vehicle: "2023 Rolls-Royce Cullinan",
   },
   {
-    quote: "I brought my GT3 RS in two weeks before Pebble Beach. It placed second in class. I'm not saying Aurum won the award — but I'm not not saying that either.",
+    quote: "I brought my GT3 RS in two weeks before Pebble Beach. It placed second in class. I'm not saying Bubbles won the award — but I'm not not saying that either.",
     author: "David K.",
     location: "Montecito, CA",
     vehicle: "2023 Porsche 911 GT3 RS",

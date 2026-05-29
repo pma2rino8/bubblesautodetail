@@ -5,7 +5,7 @@ import { work } from "@/lib/data";
 
 export const metadata: Metadata = {
   title: "Work",
-  description: "Case studies from the Aurum Detail studio — six continents, one standard.",
+  description: "Case studies from the Bubbles Auto Detail studio — six continents, one standard.",
 };
 
 export default function WorkPage() {

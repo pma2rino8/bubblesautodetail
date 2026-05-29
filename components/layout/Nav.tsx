@@ -38,7 +38,7 @@ export function Nav() {
         <div className="px-6 md:px-10 lg:px-16 h-16 flex items-center justify-between">
           {/* Wordmark */}
           <Link href="/" className="font-mono text-[11px] tracking-[0.3em] text-frost uppercase hover:text-mist transition-colors duration-300">
-            Aurum Detail
+            Bubbles Auto Detail
           </Link>
 
           {/* Desktop nav */}

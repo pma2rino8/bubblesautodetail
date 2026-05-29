@@ -27,8 +27,8 @@ const jetbrainsMono = JetBrains_Mono({
 
 export const metadata: Metadata = {
   title: {
-    default: "Aurum Detail — Concours-Grade Automotive Detailing",
-    template: "%s | Aurum Detail",
+    default: "Bubbles Auto Detail — Concours-Grade Automotive Detailing",
+    template: "%s | Bubbles Auto Detail",
   },
   description:
     "Los Angeles' premier luxury automotive detailing studio. Concours-grade paint correction, ceramic coating, and protection for discerning collectors.",
@@ -36,7 +36,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     locale: "en_US",
-    siteName: "Aurum Detail",
+    siteName: "Bubbles Auto Detail",
   },
   robots: {
     index: true,
