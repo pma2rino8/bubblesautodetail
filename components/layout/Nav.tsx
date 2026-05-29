@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { MagneticButton } from "@/components/ui/MagneticButton";
@@ -37,8 +38,15 @@ export function Nav() {
       >
         <div className="px-6 md:px-10 lg:px-16 h-16 flex items-center justify-between">
           {/* Wordmark */}
-          <Link href="/" className="font-mono text-[11px] tracking-[0.3em] text-frost uppercase hover:text-mist transition-colors duration-300">
-            Bubbles Auto Detail
+          <Link href="/" className="flex items-center">
+            <Image
+              src="/logo.png"
+              alt="Bubbles Auto Detail"
+              width={120}
+              height={48}
+              className="h-10 w-auto object-contain"
+              priority
+            />
           </Link>
 
           {/* Desktop nav */}

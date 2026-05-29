@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
 
@@ -105,15 +106,20 @@ export function Footer() {
           </p>
         </div>
 
-        {/* Oversized wordmark */}
-        <div className="overflow-hidden pb-0 -mx-6 md:-mx-10 lg:-mx-16">
+        {/* Footer logo */}
+        <div className="pb-10 flex justify-center">
           <motion.div
-            className="font-display font-black text-[clamp(4rem,14vw,18rem)] leading-[0.82] tracking-[-0.04em] text-frost/[0.03] select-none text-center whitespace-nowrap"
-            initial={{ y: "60%" }}
-            animate={inView ? { y: "15%" } : {}}
+            initial={{ opacity: 0, y: 20 }}
+            animate={inView ? { opacity: 0.15, y: 0 } : {}}
             transition={{ duration: 1.2, ease: [0.6, 0.01, 0.05, 0.95] }}
           >
-            BUBBLES AUTO DETAIL
+            <Image
+              src="/logo.png"
+              alt="Bubbles Auto Detail"
+              width={280}
+              height={112}
+              className="h-28 w-auto object-contain"
+            />
           </motion.div>
         </div>
       </div>

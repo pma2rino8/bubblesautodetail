@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 
 export function Preloader({ onComplete }: { onComplete: () => void }) {
@@ -34,32 +35,22 @@ export function Preloader({ onComplete }: { onComplete: () => void }) {
           exit={{ opacity: 0 }}
           transition={{ duration: 0.8, ease: [0.6, 0.01, 0.05, 0.95] }}
         >
-          {/* SVG Wordmark draws in */}
-          <motion.svg
-            width="200"
-            height="32"
-            viewBox="0 0 200 32"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
+          {/* Logo */}
+          <motion.div
             className="mb-12"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ duration: 0.4 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
           >
-            <motion.text
-              x="0"
-              y="24"
-              fontFamily="var(--font-inter-tight)"
-              fontSize="14"
-              letterSpacing="0.3em"
-              fill="#BFE0F2"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 0.2, duration: 0.6 }}
-            >
-              BUBBLES AUTO DETAIL
-            </motion.text>
-          </motion.svg>
+            <Image
+              src="/logo.png"
+              alt="Bubbles Auto Detail"
+              width={160}
+              height={64}
+              className="h-16 w-auto object-contain"
+              priority
+            />
+          </motion.div>
 
           {/* Counter */}
           <div className="font-mono text-[11px] tracking-[0.3em] text-platinum">
