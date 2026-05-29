@@ -52,9 +52,8 @@ export function Footer() {
               Contact
             </p>
             <div className="space-y-2">
-              <p className="font-sans text-[13px] text-platinum/60">2818 Olympic Blvd</p>
-              <p className="font-sans text-[13px] text-platinum/60">Los Angeles, CA 90006</p>
-              <p className="font-sans text-[13px] text-platinum/60 mt-4">+1 (310) 555-0192</p>
+              <p className="font-sans text-[13px] text-platinum/60">Bay Area, CA</p>
+              <p className="font-sans text-[13px] text-platinum/60 mt-4">(831) 783-6987</p>
               <p className="font-sans text-[13px] text-platinum/60">hello@bubblesautodetail.com</p>
             </div>
           </div>
@@ -99,10 +98,10 @@ export function Footer() {
         {/* Bottom: legal */}
         <div className="border-t border-frost/5 py-6 flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
           <p className="font-mono text-[9px] tracking-[0.2em] text-platinum/25 uppercase">
-            © 2024 Bubbles Auto Detail. All rights reserved.
+            © 2026 Bubbles Auto Detail. All rights reserved.
           </p>
           <p className="font-mono text-[9px] tracking-[0.2em] text-platinum/25 uppercase">
-            Los Angeles, California
+            Bay Area, California
           </p>
         </div>
 

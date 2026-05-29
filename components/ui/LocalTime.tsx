@@ -23,7 +23,7 @@ export function LocalTime() {
 
   return (
     <span className="font-mono text-[10px] tracking-[0.2em] text-platinum uppercase">
-      LOS ANGELES — {time} PST
+      BAY AREA — {time} PST
     </span>
   );
 }

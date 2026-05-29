@@ -146,7 +146,7 @@ export const work = [
 
 export const testimonials = [
   {
-    quote: "We've used Bubbles for every vehicle in our collection for the past six years. The level of care is unlike anything else in Los Angeles. They treat each car as if it's their own.",
+    quote: "We've used Bubbles for every vehicle in our collection for the past six years. The level of care is unlike anything else in the Bay Area. They treat each car as if it's their own.",
     author: "Jonathan M.",
     location: "Malibu, CA",
     vehicle: "2022 Porsche 911 Turbo S & 2020 Ferrari F8 Tributo",

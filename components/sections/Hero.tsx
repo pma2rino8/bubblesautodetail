@@ -131,7 +131,7 @@ export function Hero() {
               className="flex flex-col sm:flex-row items-start sm:items-center gap-6 sm:gap-10"
             >
               <p className="font-sans text-[13px] tracking-[0.05em] text-platinum max-w-xs leading-relaxed">
-                By appointment only. Los Angeles, CA.
+                By appointment only. Bay Area, CA.
                 <br />
                 Every vehicle treated as a commission.
               </p>

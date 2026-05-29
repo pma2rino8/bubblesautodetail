@@ -48,8 +48,7 @@ export function BookingCTA() {
           <div className="space-y-1">
             <p className="font-mono text-[10px] tracking-[0.2em] text-platinum/40 uppercase">Address</p>
             <p className="font-sans text-[13px] text-platinum leading-relaxed">
-              2818 Olympic Blvd<br />
-              Los Angeles, CA 90006
+              Bay Area, CA
             </p>
           </div>
           <div className="space-y-1">
@@ -61,7 +60,7 @@ export function BookingCTA() {
           </div>
           <div className="space-y-1">
             <p className="font-mono text-[10px] tracking-[0.2em] text-platinum/40 uppercase">Phone</p>
-            <p className="font-sans text-[13px] text-platinum">+1 (310) 555-0192</p>
+            <p className="font-sans text-[13px] text-platinum">(831) 783-6987</p>
           </div>
         </motion.div>
 

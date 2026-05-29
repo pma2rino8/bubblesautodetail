@@ -31,8 +31,8 @@ export const metadata: Metadata = {
     template: "%s | Bubbles Auto Detail",
   },
   description:
-    "Los Angeles' premier luxury automotive detailing studio. Concours-grade paint correction, ceramic coating, and protection for discerning collectors.",
-  keywords: ["luxury car detailing", "ceramic coating", "paint correction", "Los Angeles", "concours", "automotive"],
+    "Bay Area's premier luxury automotive detailing studio. Concours-grade paint correction, ceramic coating, and protection for discerning collectors.",
+  keywords: ["luxury car detailing", "ceramic coating", "paint correction", "Bay Area", "concours", "automotive"],
   openGraph: {
     type: "website",
     locale: "en_US",

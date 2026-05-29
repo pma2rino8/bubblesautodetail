@@ -52,7 +52,7 @@ export default function StudioPage() {
               We are appointment-only, by design. We take on fewer cars than most studios so that each one receives the full attention it deserves. We do not rush. We do not cut corners. We do not leave until we are satisfied.
             </p>
             <p className="font-sans text-[15px] text-platinum/70 leading-[1.8]">
-              Our studio in Los Angeles operates under controlled humidity and temperature. Every polishing bay is equipped with 10,000-lux inspection lighting. We document every vehicle before and after with a calibrated paint depth gauge and a full photographic record.
+              Our studio in the Bay Area operates under controlled humidity and temperature. Every polishing bay is equipped with 10,000-lux inspection lighting. We document every vehicle before and after with a calibrated paint depth gauge and a full photographic record.
             </p>
           </div>
         </div>
