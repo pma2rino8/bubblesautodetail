@@ -11,19 +11,19 @@ const team = [
     name: "Marcus Reyes",
     role: "Founder & Lead Detailer",
     bio: "Fifteen years of experience. Trained under three of Europe's leading concours specialists. Every car that enters the studio passes through Marcus's hands.",
-    image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=600&q=85",
+    image: "/images/IMG_1071.jpg",
   },
   {
     name: "Elena Voss",
     role: "Paint Correction Specialist",
     bio: "Elena holds advanced certifications from GYEON, IGL Coatings, and Menzerna. She has corrected over 300 vehicles and specialises in matte and special-order finishes.",
-    image: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=600&q=85",
+    image: "/images/IMG_9819.jpg",
   },
   {
     name: "James Park",
     role: "Interior & Leather Specialist",
     bio: "James trained as an upholstery specialist before moving into detailing. He holds a unique ability to restore and protect leather, Alcantara, and carbon fibre interiors.",
-    image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=600&q=85",
+    image: "/images/IMG_1350.jpg",
   },
 ];
 
@@ -60,9 +60,9 @@ export default function StudioPage() {
         {/* Studio images */}
         <div className="grid grid-cols-2 md:grid-cols-3 gap-2 mb-32">
           {[
-            "https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=800&q=85",
-            "https://images.unsplash.com/photo-1592198084033-aade902d1aae?w=800&q=85",
-            "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=85",
+            "/images/IMG_9282.jpg",
+            "/images/IMG_0870.jpg",
+            "/images/IMG_1350.jpg",
           ].map((src, i) => (
             <div key={i} className="relative h-48 md:h-64">
               <Image src={src} alt="Studio" fill className="object-cover" sizes="33vw" />

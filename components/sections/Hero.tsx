@@ -15,7 +15,7 @@ export function Hero() {
         <div className="absolute inset-0 z-10 bg-gradient-to-b from-ink/60 via-ink/20 to-ink/80" />
         <div className="absolute inset-0 z-10 bg-gradient-to-r from-ink/70 via-transparent to-transparent" />
         <Image
-          src="https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=1920&q=90"
+          src="/images/IMG_9282.jpg"
           alt="Black Porsche 911 in studio lighting"
           fill
           priority

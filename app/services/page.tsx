@@ -62,7 +62,7 @@ export default function ServicesPage() {
 
               <div className="relative mt-10 md:mt-0 h-64 md:h-auto">
                 <Image
-                  src={`https://images.unsplash.com/photo-${i % 2 === 0 ? "1503376780353-7e6692767b70" : "1592198084033-aade902d1aae"}?w=900&q=85`}
+                  src={["/images/IMG_9819.jpg", "/images/IMG_9586.jpg", "/images/IMG_1264.jpg", "/images/IMG_1350.jpg"][i]}
                   alt={svc.name}
                   fill
                   className="object-cover"

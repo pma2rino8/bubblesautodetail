@@ -9,31 +9,31 @@ const steps = [
     number: "01",
     name: "Inspection",
     description: "Under 10,000-lux inspection lights, we document every imperfection — swirl marks, scratches, water etching, paint transfer. Baseline paint depth readings taken per panel.",
-    image: "https://images.unsplash.com/photo-1486262715619-67b85e0b08d3?w=900&q=85",
+    image: "/images/IMG_1347.jpg",
   },
   {
     number: "02",
     name: "Decontamination",
     description: "Iron fallout dissolving, clay bar treatment, citrus pre-wash and pH-neutral hand wash. The surface is chemically and physically clean before any polishing begins.",
-    image: "https://images.unsplash.com/photo-1552519507-da3b142c6e3d?w=900&q=85",
+    image: "/images/IMG_1397.jpg",
   },
   {
     number: "03",
     name: "Correction",
     description: "Machine polishing removes swirl marks, buffer trails and light scratches. We use multiple compounds and pads, working panel-by-panel in optimal ambient conditions.",
-    image: "https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=900&q=85",
+    image: "/images/IMG_1313.jpg",
   },
   {
     number: "04",
     name: "Protection",
     description: "Ceramic coating, paint sealant, or carnauba wax applied to specification. Each product is selected to match the vehicle's use case, storage environment, and owner preference.",
-    image: "https://images.unsplash.com/photo-1592198084033-aade902d1aae?w=900&q=85",
+    image: "/images/IMG_1042.jpg",
   },
   {
     number: "05",
     name: "Final Inspection",
     description: "The finished car is inspected under raking light from every angle. We photograph each panel and walk the owner through our findings. Nothing leaves unless we're satisfied.",
-    image: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=900&q=85",
+    image: "/images/IMG_1136.jpg",
   },
 ];
 
