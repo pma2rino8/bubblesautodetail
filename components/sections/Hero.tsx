@@ -42,7 +42,7 @@ export function Hero() {
         transition={{ delay: 1.4, duration: 0.8, ease: LUXURY_EASE }}
       >
         <span className="font-mono text-[10px] tracking-[0.25em] text-platinum uppercase">
-          Est. 2014
+          Est. 2022
         </span>
       </motion.div>
 
