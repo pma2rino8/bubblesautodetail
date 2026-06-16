@@ -8,22 +8,10 @@ export const metadata: Metadata = {
 
 const team = [
   {
-    name: "Marcus Reyes",
-    role: "Founder & Lead Detailer",
-    bio: "Fifteen years of experience. Trained under three of Europe's leading concours specialists. Every car that enters the studio passes through Marcus's hands.",
-    image: "/images/IMG_1071.jpg",
-  },
-  {
-    name: "Elena Voss",
-    role: "Paint Correction Specialist",
-    bio: "Elena holds advanced certifications from GYEON, IGL Coatings, and Menzerna. She has corrected over 300 vehicles and specialises in matte and special-order finishes.",
-    image: "/images/IMG_9819.jpg",
-  },
-  {
-    name: "James Park",
-    role: "Interior & Leather Specialist",
-    bio: "James trained as an upholstery specialist before moving into detailing. He holds a unique ability to restore and protect leather, Alcantara, and carbon fibre interiors.",
-    image: "/images/IMG_1350.jpg",
+    name: "Peter Maturino",
+    role: "Mr. Bubbles — Founder & Lead Detailer",
+    bio: "Millions of dollars worth of exotic vehicles washed.",
+    image: "/images/mr-bubbles.jpg",
   },
 ];
 
@@ -73,22 +61,22 @@ export default function StudioPage() {
 
         {/* Team */}
         <div className="border-t border-frost/5 pt-16">
-          <h2 className="font-display text-4xl text-frost mb-16">The Team</h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <h2 className="font-display text-4xl text-frost mb-16">Meet Mr. Bubbles</h2>
+          <div className="max-w-sm">
             {team.map((member) => (
               <div key={member.name} className="group">
-                <div className="relative h-72 mb-5 overflow-hidden">
+                <div className="relative h-96 mb-6 overflow-hidden">
                   <Image
                     src={member.image}
                     alt={member.name}
                     fill
                     className="object-cover grayscale group-hover:grayscale-0 transition-all duration-700"
-                    sizes="33vw"
+                    sizes="(max-width: 640px) 100vw, 384px"
                   />
                 </div>
-                <p className="font-display text-xl text-frost mb-1">{member.name}</p>
+                <p className="font-display text-2xl text-frost mb-1">{member.name}</p>
                 <p className="font-mono text-[10px] tracking-[0.2em] text-mist uppercase mb-4">{member.role}</p>
-                <p className="font-sans text-[13px] text-platinum/60 leading-relaxed">{member.bio}</p>
+                <p className="font-sans text-[14px] text-platinum/60 leading-relaxed">{member.bio}</p>
               </div>
             ))}
           </div>

@@ -36,15 +36,26 @@ export function Nav() {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8, delay: 0.2, ease: [0.6, 0.01, 0.05, 0.95] }}
       >
-        <div className="px-6 md:px-10 lg:px-16 h-16 flex items-center justify-between">
+        <div className="px-6 md:px-10 lg:px-16 h-20 flex items-center justify-between">
           {/* Wordmark */}
-          <Link href="/" className="flex items-center">
+          <Link
+            href="/"
+            className="flex-shrink-0 block overflow-hidden relative"
+            style={{ width: 200, height: 80 }}
+          >
             <Image
               src="/logo.png"
               alt="Bubbles Auto Detail"
-              width={120}
-              height={48}
-              className="h-10 w-auto object-contain"
+              width={200}
+              height={200}
+              style={{
+                position: "absolute",
+                top: "50%",
+                left: "50%",
+                transform: "translate(-50%, -50%)",
+                width: "200px",
+                height: "200px",
+              }}
               priority
             />
           </Link>
