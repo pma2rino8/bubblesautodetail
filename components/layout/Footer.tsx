@@ -53,7 +53,7 @@ export function Footer() {
             <div className="space-y-2">
               <p className="font-sans text-[13px] text-platinum/60">Bay Area, CA</p>
               <p className="font-sans text-[13px] text-platinum/60 mt-4">(831) 783-6987</p>
-              <p className="font-sans text-[13px] text-platinum/60">hello@bubblesautodetail.com</p>
+              <p className="font-sans text-[13px] text-platinum/60">peter@bubblesautodetail.com</p>
             </div>
           </div>
 
