@@ -1,11 +1,11 @@
 import type { Metadata } from "next";
 import Image from "next/image";
-import { detailPackages, ceramicPackages, addOns } from "@/lib/data";
+import { detailPackages, maintenancePackages, ceramicPackages, addOns } from "@/lib/data";
 
 export const metadata: Metadata = {
   title: "Services",
   description:
-    "Detail packages from Bronze to Diamond, ceramic coating tiers up to nine years, and à la carte add-on services.",
+    "Detail packages from Bronze to Diamond, ongoing maintenance plans, ceramic coating tiers up to nine years, and à la carte add-on services.",
 };
 
 const packageImages = [
@@ -76,6 +76,32 @@ export default function ServicesPage() {
                   sizes="(max-width: 768px) 100vw, 50vw"
                 />
                 <div className="absolute inset-0 bg-gradient-to-l from-transparent to-ink/40" />
+              </div>
+            </div>
+          ))}
+        </div>
+
+        {/* Ongoing maintenance */}
+        <h2
+          id="maintenance"
+          className="font-mono text-[10px] tracking-[0.35em] text-mist uppercase mb-2 mt-32 pt-16 border-t border-frost/5"
+        >
+          Ongoing Maintenance
+        </h2>
+        <p className="font-sans text-[14px] text-platinum/70 leading-relaxed max-w-md mb-12">
+          Keep a finished car flawless between full details. Recurring visits on a schedule that suits how you drive, priced per visit.
+        </p>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-px bg-frost/5 border border-frost/5">
+          {maintenancePackages.map((pkg) => (
+            <div key={pkg.id} id={pkg.id} className="bg-ink p-8 flex flex-col">
+              <p className="font-mono text-[10px] tracking-[0.3em] text-mist/50 mb-6">{pkg.number}</p>
+              <h3 className="font-display text-2xl text-frost mb-1 leading-tight">{pkg.name}</h3>
+              <p className="font-mono text-[10px] tracking-[0.2em] text-platinum/40 uppercase mb-8">
+                {pkg.frequency}
+              </p>
+              <div className="mt-auto pt-6 border-t border-frost/5">
+                <p className="font-display text-3xl text-frost leading-none">{pkg.price}</p>
+                <p className="font-mono text-[9px] tracking-[0.25em] text-platinum/40 uppercase mt-2">{pkg.per}</p>
               </div>
             </div>
           ))}
