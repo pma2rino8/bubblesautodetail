@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { TIME_SLOTS } from "@/lib/slots";
 import { detailPackages, ceramicPackages } from "@/lib/data";
@@ -50,25 +50,6 @@ function SchedulePicker({
   const today = new Date();
   today.setHours(0, 0, 0, 0);
   const [view, setView] = useState(() => new Date(today.getFullYear(), today.getMonth(), 1));
-  const [available, setAvailable] = useState<string[] | null>(null);
-  const [loadingSlots, setLoadingSlots] = useState(false);
-
-  // When a date is chosen, load the slots still open on the calendar.
-  useEffect(() => {
-    if (!date) {
-      setAvailable(null);
-      return;
-    }
-    let active = true;
-    setLoadingSlots(true);
-    setAvailable(null);
-    fetch(`/api/availability?date=${date}`)
-      .then((r) => (r.ok ? r.json() : Promise.reject(new Error("availability"))))
-      .then((data) => { if (active) setAvailable(data.slots as string[]); })
-      .catch(() => { if (active) setAvailable([...TIME_SLOTS]); }) // fail open
-      .finally(() => { if (active) setLoadingSlots(false); });
-    return () => { active = false; };
-  }, [date]);
 
   const year = view.getFullYear();
   const month = view.getMonth();
@@ -139,39 +120,24 @@ function SchedulePicker({
       {date && (
         <div>
           <label className="block font-mono text-[9px] tracking-[0.3em] text-platinum/40 uppercase mb-4">
-            Available Times — {formatLongDate(date)}
+            Preferred Time — {formatLongDate(date)}
           </label>
-          {loadingSlots ? (
-            <p className="font-sans text-[12px] text-platinum/40">Checking availability…</p>
-          ) : available && available.length === 0 ? (
-            <p className="font-sans text-[12px] text-platinum/40">
-              No times available on this date. Please choose another day.
-            </p>
-          ) : (
-            <div className="grid grid-cols-3 sm:grid-cols-5 gap-2">
-              {TIME_SLOTS.map((slot) => {
-                const open = !available || available.includes(slot);
-                const selected = time === slot;
-                return (
-                  <button
-                    key={slot}
-                    type="button"
-                    disabled={!open}
-                    onClick={() => onTime(slot)}
-                    className={`py-3 border font-sans text-[12px] transition-all duration-200 ${
-                      selected
-                        ? "border-mist/60 bg-deep/30 text-frost"
-                        : !open
-                          ? "border-frost/5 text-platinum/20 line-through cursor-not-allowed"
-                          : "border-frost/10 text-platinum/60 hover:border-mist/40 hover:text-frost"
-                    }`}
-                  >
-                    {slot}
-                  </button>
-                );
-              })}
-            </div>
-          )}
+          <div className="grid grid-cols-3 sm:grid-cols-5 gap-2">
+            {TIME_SLOTS.map((slot) => (
+              <button
+                key={slot}
+                type="button"
+                onClick={() => onTime(slot)}
+                className={`py-3 border font-sans text-[12px] transition-all duration-200 ${
+                  time === slot
+                    ? "border-mist/60 bg-deep/30 text-frost"
+                    : "border-frost/10 text-platinum/60 hover:border-mist/40 hover:text-frost"
+                }`}
+              >
+                {slot}
+              </button>
+            ))}
+          </div>
         </div>
       )}
     </div>
@@ -181,7 +147,6 @@ function SchedulePicker({
 export default function BookPage() {
   const [step, setStep] = useState(1);
   const [status, setStatus] = useState<"idle" | "sending" | "sent" | "error">("idle");
-  const [errorMsg, setErrorMsg] = useState("");
   const [form, setForm] = useState({
     make: "", model: "", year: "", color: "",
     service: "", name: "", email: "", phone: "",
@@ -192,19 +157,12 @@ export default function BookPage() {
 
   const submit = async () => {
     setStatus("sending");
-    setErrorMsg("");
     try {
       const res = await fetch("/api/book", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(form),
       });
-      if (res.status === 409) {
-        const data = await res.json().catch(() => ({}));
-        setErrorMsg(data.message || "That time was just booked. Please pick another.");
-        setStatus("error");
-        return;
-      }
       if (!res.ok) throw new Error(await res.text());
       setStatus("sent");
     } catch (err) {
@@ -391,7 +349,7 @@ export default function BookPage() {
               )}
               {status === "error" && (
                 <p className="mt-4 font-sans text-[12px] text-red-400/80">
-                  {errorMsg || "Something went wrong sending your request. Please try again or email us directly."}
+                  Something went wrong sending your request. Please try again or email us directly.
                 </p>
               )}
             </motion.div>

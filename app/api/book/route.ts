@@ -1,10 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
 import { Resend } from "resend";
-import {
-  calendarConfigured,
-  isSlotAvailable,
-  createBookingEvent,
-} from "@/lib/google-calendar";
 
 const TO = "peter@bubblesautodetail.com";
 // Until bubblesautodetail.com is verified in Resend, this must be Resend's
@@ -52,27 +47,6 @@ export async function POST(request: NextRequest) {
     );
   }
 
-  // Write the booking to Google Calendar (if configured). Re-check availability
-  // server-side first so a slot booked since the form loaded can't double-book.
-  let eventLink = "";
-  if (calendarConfigured() && form.date && form.time) {
-    try {
-      if (!(await isSlotAvailable(form.date, form.time))) {
-        return NextResponse.json(
-          { error: "slot_taken", message: "That time was just booked. Please choose another." },
-          { status: 409 }
-        );
-      }
-      eventLink = await createBookingEvent(form);
-    } catch (err) {
-      console.error("Calendar event creation failed:", err);
-      return NextResponse.json(
-        { error: "Could not reserve that time. Please try again." },
-        { status: 502 }
-      );
-    }
-  }
-
   const rows: [string, string][] = [
     ["Vehicle", [form.year, form.make, form.model].filter(Boolean).join(" ") + (form.color ? ` — ${form.color}` : "")],
     ["Service", form.service || "—"],
@@ -82,7 +56,6 @@ export async function POST(request: NextRequest) {
     ["Preferred Date", form.date || "—"],
     ["Preferred Time", form.time || "—"],
     ["Notes", form.notes || "—"],
-    ...(eventLink ? ([["Calendar", eventLink]] as [string, string][]) : []),
   ];
 
   const html = `
