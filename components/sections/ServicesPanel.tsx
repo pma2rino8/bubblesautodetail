@@ -2,7 +2,7 @@
 
 import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
-import { services } from "@/lib/data";
+import { detailPackages } from "@/lib/data";
 
 export function ServicesPanel() {
   const ref = useRef<HTMLDivElement>(null);
@@ -23,8 +23,8 @@ export function ServicesPanel() {
         </div>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 border-t border-frost/5">
-        {services.map((svc, i) => (
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 border-t border-frost/5">
+        {detailPackages.map((svc, i) => (
           <motion.div
             key={svc.id}
             className="group border-r border-frost/5 last:border-r-0 p-8 md:p-10 relative overflow-hidden cursor-pointer"
@@ -56,8 +56,7 @@ export function ServicesPanel() {
 
               {/* Price */}
               <div className="flex items-baseline gap-1 mb-8">
-                <span className="font-mono text-[10px] tracking-[0.2em] text-platinum/50 uppercase">from</span>
-                <span className="font-display text-3xl text-frost">{svc.priceFrom}</span>
+                <span className="font-display text-3xl text-frost">{svc.price}</span>
               </div>
 
               {/* Feature list — reveals on hover */}
@@ -70,11 +69,8 @@ export function ServicesPanel() {
                 ))}
               </ul>
 
-              {/* Bottom: duration + link */}
-              <div className="mt-10 pt-6 border-t border-frost/5 flex items-center justify-between">
-                <span className="font-mono text-[10px] tracking-[0.15em] text-platinum/40 uppercase">
-                  {svc.duration}
-                </span>
+              {/* Bottom: link */}
+              <div className="mt-10 pt-6 border-t border-frost/5 flex items-center justify-end">
                 <a
                   href={`/services#${svc.id}`}
                   className="font-mono text-[10px] tracking-[0.2em] text-mist uppercase hover:text-frost transition-colors duration-300"

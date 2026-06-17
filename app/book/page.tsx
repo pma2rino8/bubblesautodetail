@@ -1,7 +1,9 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { TIME_SLOTS } from "@/lib/slots";
+import { detailPackages, ceramicPackages } from "@/lib/data";
 
 const steps = [
   { id: 1, label: "Vehicle" },
@@ -11,21 +13,205 @@ const steps = [
 ];
 
 const services = [
-  "Express Detail — from $450",
-  "Paint Correction — from $1,800",
-  "Ceramic Coating — from $3,200",
-  "Concours Preparation — from $6,500",
+  ...detailPackages.map((p) => `${p.name} — ${p.price}`),
+  ...ceramicPackages.map((p) => `${p.name} — from ${p.priceFrom}`),
 ];
+
+const WEEKDAYS = ["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"];
+const MONTHS = [
+  "January", "February", "March", "April", "May", "June",
+  "July", "August", "September", "October", "November", "December",
+];
+
+// Local YYYY-MM-DD (avoids UTC shift from toISOString)
+function toISODate(d: Date) {
+  const m = String(d.getMonth() + 1).padStart(2, "0");
+  const day = String(d.getDate()).padStart(2, "0");
+  return `${d.getFullYear()}-${m}-${day}`;
+}
+
+function formatLongDate(iso: string) {
+  if (!iso) return "";
+  const [y, m, d] = iso.split("-").map(Number);
+  const dt = new Date(y, m - 1, d);
+  return dt.toLocaleDateString("en-US", {
+    weekday: "short", month: "short", day: "numeric", year: "numeric",
+  });
+}
+
+function SchedulePicker({
+  date, time, onDate, onTime,
+}: {
+  date: string;
+  time: string;
+  onDate: (v: string) => void;
+  onTime: (v: string) => void;
+}) {
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+  const [view, setView] = useState(() => new Date(today.getFullYear(), today.getMonth(), 1));
+  const [available, setAvailable] = useState<string[] | null>(null);
+  const [loadingSlots, setLoadingSlots] = useState(false);
+
+  // When a date is chosen, load the slots still open on the calendar.
+  useEffect(() => {
+    if (!date) {
+      setAvailable(null);
+      return;
+    }
+    let active = true;
+    setLoadingSlots(true);
+    setAvailable(null);
+    fetch(`/api/availability?date=${date}`)
+      .then((r) => (r.ok ? r.json() : Promise.reject(new Error("availability"))))
+      .then((data) => { if (active) setAvailable(data.slots as string[]); })
+      .catch(() => { if (active) setAvailable([...TIME_SLOTS]); }) // fail open
+      .finally(() => { if (active) setLoadingSlots(false); });
+    return () => { active = false; };
+  }, [date]);
+
+  const year = view.getFullYear();
+  const month = view.getMonth();
+  const firstWeekday = new Date(year, month, 1).getDay();
+  const daysInMonth = new Date(year, month + 1, 0).getDate();
+  const canGoPrev = view > new Date(today.getFullYear(), today.getMonth(), 1);
+
+  const cells: (number | null)[] = [];
+  for (let i = 0; i < firstWeekday; i++) cells.push(null);
+  for (let d = 1; d <= daysInMonth; d++) cells.push(d);
+
+  const isDisabled = (d: number) => {
+    const dt = new Date(year, month, d);
+    dt.setHours(0, 0, 0, 0);
+    return dt < today || dt.getDay() === 0; // past dates and Sundays (closed)
+  };
+
+  const shiftMonth = (delta: number) =>
+    setView(new Date(year, month + delta, 1));
+
+  const navBtn = "w-8 h-8 flex items-center justify-center border border-frost/10 text-platinum/60 hover:border-mist/50 hover:text-frost transition-colors duration-300 disabled:opacity-25 disabled:hover:border-frost/10 disabled:hover:text-platinum/60 disabled:cursor-not-allowed";
+
+  return (
+    <div className="space-y-8">
+      <div>
+        <label className="block font-mono text-[9px] tracking-[0.3em] text-platinum/40 uppercase mb-4">
+          Select a Drop-Off Date
+        </label>
+        <div className="border border-frost/10 p-5">
+          <div className="flex items-center justify-between mb-5">
+            <button type="button" onClick={() => shiftMonth(-1)} disabled={!canGoPrev} className={navBtn} aria-label="Previous month">←</button>
+            <span className="font-display text-lg text-frost">{MONTHS[month]} {year}</span>
+            <button type="button" onClick={() => shiftMonth(1)} className={navBtn} aria-label="Next month">→</button>
+          </div>
+          <div className="grid grid-cols-7 gap-1 mb-2">
+            {WEEKDAYS.map((w) => (
+              <div key={w} className="text-center font-mono text-[9px] tracking-[0.1em] text-platinum/30 uppercase py-1">{w}</div>
+            ))}
+          </div>
+          <div className="grid grid-cols-7 gap-1">
+            {cells.map((d, i) => {
+              if (d === null) return <div key={`e${i}`} />;
+              const iso = toISODate(new Date(year, month, d));
+              const disabled = isDisabled(d);
+              const selected = date === iso;
+              return (
+                <button
+                  key={iso}
+                  type="button"
+                  disabled={disabled}
+                  onClick={() => { onDate(iso); onTime(""); }}
+                  className={`aspect-square flex items-center justify-center font-sans text-[12px] border transition-all duration-200 ${
+                    selected
+                      ? "border-mist/60 bg-deep/30 text-frost"
+                      : disabled
+                        ? "border-transparent text-platinum/15 cursor-not-allowed"
+                        : "border-frost/5 text-platinum/70 hover:border-mist/40 hover:text-frost"
+                  }`}
+                >
+                  {d}
+                </button>
+              );
+            })}
+          </div>
+        </div>
+      </div>
+
+      {date && (
+        <div>
+          <label className="block font-mono text-[9px] tracking-[0.3em] text-platinum/40 uppercase mb-4">
+            Available Times — {formatLongDate(date)}
+          </label>
+          {loadingSlots ? (
+            <p className="font-sans text-[12px] text-platinum/40">Checking availability…</p>
+          ) : available && available.length === 0 ? (
+            <p className="font-sans text-[12px] text-platinum/40">
+              No times available on this date. Please choose another day.
+            </p>
+          ) : (
+            <div className="grid grid-cols-3 sm:grid-cols-5 gap-2">
+              {TIME_SLOTS.map((slot) => {
+                const open = !available || available.includes(slot);
+                const selected = time === slot;
+                return (
+                  <button
+                    key={slot}
+                    type="button"
+                    disabled={!open}
+                    onClick={() => onTime(slot)}
+                    className={`py-3 border font-sans text-[12px] transition-all duration-200 ${
+                      selected
+                        ? "border-mist/60 bg-deep/30 text-frost"
+                        : !open
+                          ? "border-frost/5 text-platinum/20 line-through cursor-not-allowed"
+                          : "border-frost/10 text-platinum/60 hover:border-mist/40 hover:text-frost"
+                    }`}
+                  >
+                    {slot}
+                  </button>
+                );
+              })}
+            </div>
+          )}
+        </div>
+      )}
+    </div>
+  );
+}
 
 export default function BookPage() {
   const [step, setStep] = useState(1);
+  const [status, setStatus] = useState<"idle" | "sending" | "sent" | "error">("idle");
+  const [errorMsg, setErrorMsg] = useState("");
   const [form, setForm] = useState({
     make: "", model: "", year: "", color: "",
     service: "", name: "", email: "", phone: "",
-    date: "", notes: "",
+    date: "", time: "", notes: "",
   });
 
   const update = (k: string, v: string) => setForm((f) => ({ ...f, [k]: v }));
+
+  const submit = async () => {
+    setStatus("sending");
+    setErrorMsg("");
+    try {
+      const res = await fetch("/api/book", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(form),
+      });
+      if (res.status === 409) {
+        const data = await res.json().catch(() => ({}));
+        setErrorMsg(data.message || "That time was just booked. Please pick another.");
+        setStatus("error");
+        return;
+      }
+      if (!res.ok) throw new Error(await res.text());
+      setStatus("sent");
+    } catch (err) {
+      console.error(err);
+      setStatus("error");
+    }
+  };
 
   const inputCls = "w-full bg-transparent border border-frost/10 focus:border-mist/50 px-5 py-3.5 font-sans text-[13px] text-frost placeholder-platinum/25 outline-none transition-colors duration-300";
   const labelCls = "block font-mono text-[9px] tracking-[0.3em] text-platinum/40 uppercase mb-2";
@@ -143,10 +329,12 @@ export default function BookPage() {
                   <input type="tel" className={inputCls} placeholder="+1 (310) 555-0000" value={form.phone} onChange={e => update("phone", e.target.value)} />
                 </div>
               </div>
-              <div>
-                <label className={labelCls}>Preferred Drop-Off Date</label>
-                <input type="date" className={inputCls} value={form.date} onChange={e => update("date", e.target.value)} />
-              </div>
+              <SchedulePicker
+                date={form.date}
+                time={form.time}
+                onDate={(v) => update("date", v)}
+                onTime={(v) => update("time", v)}
+              />
               <div>
                 <label className={labelCls}>Additional Notes</label>
                 <textarea
@@ -176,7 +364,8 @@ export default function BookPage() {
                   ["Name", form.name],
                   ["Email", form.email],
                   ["Phone", form.phone],
-                  ["Date", form.date],
+                  ["Date", formatLongDate(form.date)],
+                  ["Time", form.time],
                 ].map(([k, v]) => (
                   <div key={k} className="flex items-start gap-6">
                     <span className="font-mono text-[9px] tracking-[0.2em] text-platinum/30 uppercase w-16 flex-shrink-0 pt-0.5">{k}</span>
@@ -187,12 +376,24 @@ export default function BookPage() {
               <p className="font-sans text-[12px] text-platinum/40 leading-relaxed mb-8">
                 By submitting, you agree to be contacted by our team to confirm availability. All appointments are subject to confirmation.
               </p>
-              <button
-                className="w-full border border-mist/40 hover:border-mist py-4 font-mono text-[12px] tracking-[0.3em] text-mist uppercase hover:text-frost transition-all duration-500"
-                onClick={() => alert("Thank you. We'll be in touch within 24 hours.")}
-              >
-                Submit Request →
-              </button>
+              {status === "sent" ? (
+                <div className="border border-mist/40 py-4 text-center font-mono text-[12px] tracking-[0.3em] text-mist uppercase">
+                  Request received — we&rsquo;ll be in touch within 24 hours.
+                </div>
+              ) : (
+                <button
+                  disabled={status === "sending"}
+                  className="w-full border border-mist/40 hover:border-mist py-4 font-mono text-[12px] tracking-[0.3em] text-mist uppercase hover:text-frost transition-all duration-500 disabled:opacity-50 disabled:cursor-not-allowed"
+                  onClick={submit}
+                >
+                  {status === "sending" ? "Sending…" : "Submit Request →"}
+                </button>
+              )}
+              {status === "error" && (
+                <p className="mt-4 font-sans text-[12px] text-red-400/80">
+                  {errorMsg || "Something went wrong sending your request. Please try again or email us directly."}
+                </p>
+              )}
             </motion.div>
           )}
         </AnimatePresence>

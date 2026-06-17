@@ -60,9 +60,9 @@ export default function StudioPage() {
         </div>
 
         {/* Team */}
-        <div className="border-t border-frost/5 pt-16">
+        <div className="border-t border-frost/5 pt-16 text-center">
           <h2 className="font-display text-4xl text-frost mb-16">Meet Mr. Bubbles</h2>
-          <div className="max-w-sm">
+          <div className="max-w-sm mx-auto">
             {team.map((member) => (
               <div key={member.name} className="group">
                 <div className="relative h-96 mb-6 overflow-hidden">
