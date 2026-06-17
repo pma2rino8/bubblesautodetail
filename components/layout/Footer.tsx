@@ -14,9 +14,8 @@ const navLinks = [
 ];
 
 const socialLinks = [
-  { href: "#", label: "Instagram" },
-  { href: "#", label: "YouTube" },
-  { href: "#", label: "X / Twitter" },
+  { href: "https://www.instagram.com/themr.bubbles", label: "Instagram" },
+  { href: "https://www.tiktok.com/@themr.bubbles", label: "TikTok" },
 ];
 
 export function Footer() {
@@ -68,6 +67,8 @@ export function Footer() {
                 <div key={link.label}>
                   <a
                     href={link.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
                     className="font-sans text-[13px] text-platinum/60 hover:text-frost transition-colors duration-300"
                   >
                     {link.label}
